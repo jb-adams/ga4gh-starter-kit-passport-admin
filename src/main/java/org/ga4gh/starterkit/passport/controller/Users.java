@@ -9,6 +9,8 @@ import org.ga4gh.starterkit.common.requesthandler.BasicShowRequestHandler;
 import org.ga4gh.starterkit.common.requesthandler.BasicUpdateRequestHandler;
 import org.ga4gh.starterkit.passport.model.PassportUser;
 import org.ga4gh.starterkit.passport.utils.SerializeView;
+import org.ga4gh.starterkit.passport.utils.hibernate.PassportHibernateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/admin/ga4gh/passport/v1/users")
 public class Users {
+
+    @Autowired
+    private PassportHibernateUtil hibernateUtil;
 
     @Resource(name = "showUserRequestHandler")
     private BasicShowRequestHandler<String, PassportUser> showUser;
@@ -37,7 +42,7 @@ public class Users {
     @GetMapping
     @JsonView(SerializeView.User.class)
     public List<PassportUser> getPassportUsers() {
-        return null;
+        return hibernateUtil.getPassportUsers();
     }
 
     @GetMapping(path = "/{userId:.+}")

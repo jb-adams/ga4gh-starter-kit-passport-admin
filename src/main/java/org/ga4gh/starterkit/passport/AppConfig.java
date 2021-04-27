@@ -19,6 +19,7 @@ import org.ga4gh.starterkit.common.requesthandler.BasicUpdateRequestHandler;
 import org.ga4gh.starterkit.common.util.DeepObjectMerger;
 import org.ga4gh.starterkit.passport.configuration.PassportConfigContainer;
 import org.ga4gh.starterkit.passport.model.PassportUser;
+import org.ga4gh.starterkit.passport.model.PassportVisa;
 import org.ga4gh.starterkit.passport.utils.hibernate.PassportHibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -119,6 +120,8 @@ public class AppConfig implements WebMvcConfigurer {
      * REQUEST HANDLER BEANS
      * ****************************** */
 
+    // USERS
+
     @Bean
     @RequestScope
     public BasicShowRequestHandler<String, PassportUser> showUserRequestHandler(
@@ -157,5 +160,47 @@ public class AppConfig implements WebMvcConfigurer {
         BasicDeleteRequestHandler<String, PassportUser> deleteUser = new BasicDeleteRequestHandler<>(PassportUser.class);
         deleteUser.setHibernateUtil(hibernateUtil);
         return deleteUser;
+    }
+
+    // VISAS
+
+    @Bean
+    @RequestScope
+    public BasicShowRequestHandler<String, PassportVisa> showVisaRequestHandler(
+        @Autowired PassportHibernateUtil hibernateUtil
+    ) {
+        BasicShowRequestHandler<String, PassportVisa> showVisa = new BasicShowRequestHandler<>(PassportVisa.class);
+        showVisa.setHibernateUtil(hibernateUtil);
+        return showVisa;
+    }
+
+    @Bean
+    @RequestScope
+    public BasicCreateRequestHandler<String, PassportVisa> createVisaRequestHandler(
+        @Autowired PassportHibernateUtil hibernateUtil
+    ) {
+        BasicCreateRequestHandler<String, PassportVisa> createVisa = new BasicCreateRequestHandler<>(PassportVisa.class);
+        createVisa.setHibernateUtil(hibernateUtil);
+        return createVisa;
+    }
+
+    @Bean
+    @RequestScope
+    public BasicUpdateRequestHandler<String, PassportVisa> updateVisaRequestHandler(
+        @Autowired PassportHibernateUtil hibernateUtil
+    ) {
+        BasicUpdateRequestHandler<String, PassportVisa> updateVisa = new BasicUpdateRequestHandler<>(PassportVisa.class);
+        updateVisa.setHibernateUtil(hibernateUtil);
+        return updateVisa;
+    }
+
+    @Bean
+    @RequestScope
+    public BasicDeleteRequestHandler<String, PassportVisa> deleteVisaRequestHandler(
+        @Autowired PassportHibernateUtil hibernateUtil
+    ) {
+        BasicDeleteRequestHandler<String, PassportVisa> deleteVisa = new BasicDeleteRequestHandler<>(PassportVisa.class);
+        deleteVisa.setHibernateUtil(hibernateUtil);
+        return deleteVisa;
     }
 }
