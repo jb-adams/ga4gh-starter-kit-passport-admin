@@ -28,4 +28,7 @@ hs_err_pid*
 # Ignore Gradle build output directory
 build
 
+.classpath
+.project
+.settings
 !gradle/wrapper/gradle-wrapper.jar
