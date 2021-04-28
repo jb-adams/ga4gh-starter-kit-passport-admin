@@ -58,6 +58,7 @@ public class Visas {
     public PassportVisa createPassportVisa(
         @RequestBody PassportVisa passportVisa
     ) {
+        setBidirectionalRelationship(passportVisa);
         return createVisa.prepare(passportVisa).handleRequest();
     }
 
@@ -67,6 +68,7 @@ public class Visas {
         @PathVariable(name = "visaId") String visaId,
         @RequestBody PassportVisa passportVisa
     ) {
+        setBidirectionalRelationship(passportVisa);
         return updateVisa.prepare(visaId, passportVisa).handleRequest();
     }
 
@@ -76,5 +78,11 @@ public class Visas {
         @PathVariable(name = "visaId") String visaId
     ) {
         return deleteVisa.prepare(visaId).handleRequest();
+    }
+
+    private void setBidirectionalRelationship(PassportVisa passportVisa) {
+        if (passportVisa.getPassportVisaAssertions() != null) {
+            passportVisa.getPassportVisaAssertions().forEach(assertion -> assertion.setPassportVisa(passportVisa));
+        }
     }
 }

@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.ga4gh.starterkit.common.hibernate.HibernateEntity;
 import org.ga4gh.starterkit.passport.utils.SerializeView;
@@ -16,6 +17,7 @@ import org.hibernate.Hibernate;
 
 @Entity
 @Table(name = "passport_visa")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class PassportVisa implements HibernateEntity<String> {
 
     /* Non-relational entity attributes */
@@ -45,8 +47,9 @@ public class PassportVisa implements HibernateEntity<String> {
         passportVisaAssertions = new ArrayList<>();
     }
 
-    public PassportVisa(String id) {
+    public PassportVisa(String id, String visaName) {
         this.id = id;
+        this.visaName = visaName;
         passportVisaAssertions = new ArrayList<>();
     }
 

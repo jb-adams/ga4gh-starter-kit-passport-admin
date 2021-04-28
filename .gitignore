@@ -32,4 +32,5 @@ build
 .project
 .settings
 !gradle/wrapper/gradle-wrapper.jar
+bin
 ga4gh-starter-kit.dev.db
